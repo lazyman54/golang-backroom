@@ -1,5 +1,7 @@
 package tax
 
+import "fmt"
+
 var baseSalary int32 = 500000
 
 type Context struct {
@@ -11,6 +13,21 @@ type Context struct {
 	SocialSecurityAmount2     int32         //五险一金累计扣除金额（下半年），如果7月未更新，这里不填
 	SpecialDeductionBase      int32         //专项扣除金额
 	SpecialDeductionDetailMap map[int]int32 //专项扣除里，如果某个月扣除数不对，可以额外指定，key=月份，value=当月的值
+}
+
+func CalcAndPrint() {
+	//ctx := myCtx()
+	ctx := demoCtx()
+
+	result := CalcYearsTax(ctx)
+
+	for i := 1; i <= 13; i++ {
+		if i == 13 {
+			fmt.Printf("全年总纳税额是:%.2f元\n", float64(result[i])/100)
+		} else {
+			fmt.Printf("%d月纳税额是:%.2f元\n", i, float64(result[i])/100)
+		}
+	}
 }
 
 func CalcYearsTax(ctx Context) map[int]int64 {
@@ -71,4 +88,23 @@ func calcTax(totalSalary int64, totalBase int64, totalSecurity int64, totalDeduc
 		return taxBaseAmount*45/100 - 18192000
 	}
 
+}
+
+func demoCtx() Context {
+
+	return Context{
+		SalaryBase: 3000000,
+		SalaryDetailMap: map[int]int32{
+			1: 3050000,
+			5: 3090000,
+		},
+		SocialSecurityAmount1:     400000,
+		SocialSecurityAmount2:     450000,
+		SocialSecurityChangeMonth: 7,
+		SpecialDeductionBase:      250000,
+		SpecialDeductionDetailMap: map[int]int32{
+			1: 150000,
+			3: 150000,
+		},
+	}
 }
