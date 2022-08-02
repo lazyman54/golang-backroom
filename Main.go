@@ -1,11 +1,11 @@
 package main
 
-import (
-	"github.com/lazymank54/golang-backroom/http/server"
-)
+import "github.com/lazymank54/golang-backroom/language/defer_"
 
 func main() {
 
 	//tax.CalcAndPrint()
-	server.StartServer()
+	//server.StartServer()
+	//collection.SliceStudy()
+	defer_.DeferSolution()
 }
