@@ -1,6 +1,6 @@
 package main
 
-import "github.com/lazymank54/golang-backroom/language"
+import "github.com/lazymank54/golang-backroom/language/mysql"
 
 func main() {
 
@@ -9,5 +9,8 @@ func main() {
 	//collection.SliceStudy()
 	//defer_.DeferSolution()
 	//language.StringSolution()
-	language.StructSolution()
+	//language.StructSolution()
+	//concurrent.WaitGroupSolution()
+	//concurrent.ChannelSolution()
+	mysql.MysqlSolution()
 }
