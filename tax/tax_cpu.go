@@ -16,8 +16,8 @@ type Context struct {
 }
 
 func CalcAndPrint() {
-	//ctx := myCtx()
-	ctx := demoCtx()
+	ctx := myCtx()
+	//ctx := demoCtx()
 
 	result := CalcYearsTax(ctx)
 

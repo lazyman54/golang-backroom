@@ -1,10 +1,10 @@
 package main
 
-import "github.com/lazymank54/golang-backroom/language/mysql"
+import "github.com/lazymank54/golang-backroom/tax"
 
 func main() {
 
-	//tax.CalcAndPrint()
+	tax.CalcAndPrint()
 	//server.StartServer()
 	//collection.SliceStudy()
 	//defer_.DeferSolution()
@@ -12,5 +12,6 @@ func main() {
 	//language.StructSolution()
 	//concurrent.WaitGroupSolution()
 	//concurrent.ChannelSolution()
-	mysql.MysqlSolution()
+	//mysql.MysqlSolution()
+	//language.TransferSolution()
 }
