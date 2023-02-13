@@ -1,0 +1,46 @@
+syntax = "proto3";
+package encode;
+
+option go_package = "./pb";
+enum BattleType{
+  Match = 0;
+  Rank = 1;
+}
+
+message PlayerInfo {
+  int64 RoleID = 1;
+  int32  ZoneID = 2;
+  int32 KillNum = 3;
+  int32 DeadNum = 4;
+  int32 AssistNum = 5 ;
+  int32 HeroLvl = 6 ;
+  int32 RobotType = 7;
+  int32 Money = 8;
+  int32 HeroHurt = 9;
+  bool IsMvp = 10;
+  int32 BeHurt = 11;
+  int32 Score = 12 ;
+  int32 RoadSort = 13;
+  int32 BlackNum = 14;
+  string RoomID = 15;
+  int32 GradeType = 16;
+  int32 MultiKill = 17;
+}
+message BattleTeamInfo {
+  int32 TotalKill = 1;
+  int32 TotalMoney = 2;
+  repeated  PlayerInfo PlayerInfoList = 3;
+}
+message BattleInfo{
+  int64 ID = 1;
+  string BattleID = 2;
+  int64 BattleStartTime = 3;
+  int32 BattleLastTime = 4;
+  BattleType battleType = 5;
+  bool isBlack = 6;
+  bool isWarm = 7;
+  int32 winCamp = 8;
+
+  BattleTeamInfo  RedCampInfo = 9;
+  BattleTeamInfo BlueCampInfo = 10;
+}

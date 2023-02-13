@@ -1,9 +1,21 @@
 package language
 
-import "fmt"
+import (
+	"fmt"
+	"strings"
+)
 
 func StringSolution() {
-	traversalString()
+	//traversalString()
+	trimSpace()
+}
+
+func trimSpace() {
+
+	s := "   "
+	s = strings.TrimSpace(s)
+	fmt.Printf(s)
+	fmt.Printf("\n %v", s == "")
 }
 
 func traversalString() {

@@ -1,10 +1,12 @@
 package main
 
-import "github.com/lazymank54/golang-backroom/tax"
+import (
+	"github.com/lazymank54/golang-backroom/language/compress_"
+)
 
 func main() {
 
-	tax.CalcAndPrint()
+	//tax.CalcAndPrint()
 	//server.StartServer()
 	//collection.SliceStudy()
 	//defer_.DeferSolution()
@@ -14,4 +16,10 @@ func main() {
 	//concurrent.ChannelSolution()
 	//mysql.MysqlSolution()
 	//language.TransferSolution()
+	//util.JsonSolution()
+	//crypto.HashSolution()
+	//util.TimeSolution()
+	//generic.GenericSolution()
+	//encode.PbEncodeSolution()
+	compress_.CompressSolution()
 }

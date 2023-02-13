@@ -97,3 +97,8 @@ case string:
 }
 ```
 
+```go
+string 和 []byte 的互相转换
+var byteData []byte = []byte(str)
+var str string = string(byteData[:])
+```
