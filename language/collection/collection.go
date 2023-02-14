@@ -9,7 +9,8 @@ func SliceStudy() {
 
 }
 
-/**
+/*
+*
 数组是值类型，通过方法修改，只是修改副本
 */
 func array() {
