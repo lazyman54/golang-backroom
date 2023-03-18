@@ -1,8 +1,6 @@
 package main
 
-import (
-	"github.com/lazymank54/golang-backroom/language/compress_"
-)
+import "github.com/lazymank54/golang-backroom/language/collection"
 
 func main() {
 
@@ -21,5 +19,7 @@ func main() {
 	//util.TimeSolution()
 	//generic.GenericSolution()
 	//encode.PbEncodeSolution()
-	compress_.CompressSolution()
+	//compress_.CompressSolution()
+	//biz.FinanceSolution()
+	collection.MapSolution()
 }
