@@ -5,7 +5,16 @@ import (
 )
 
 func TestSliceData(t *testing.T) {
-	sliceData(t)
+	slicePoint(t)
+}
+
+func slicePoint(t *testing.T) {
+	sli := make([]int, 0, 4)
+	t.Logf("addr: %p", sli)
+
+	sli = append(sli, 1, 2, 3, 4, 5, 6)
+	t.Logf("addr: %p", sli)
+
 }
 
 func sliceData(t *testing.T) {

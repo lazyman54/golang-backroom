@@ -1,6 +1,6 @@
 package main
 
-import "github.com/lazymank54/golang-backroom/language/collection"
+import "github.com/lazymank54/golang-backroom/language/generic"
 
 func main() {
 
@@ -17,9 +17,9 @@ func main() {
 	//util.JsonSolution()
 	//crypto.HashSolution()
 	//util.TimeSolution()
-	//generic.GenericSolution()
+	generic.GenericSolution()
 	//encode.PbEncodeSolution()
 	//compress_.CompressSolution()
 	//biz.FinanceSolution()
-	collection.MapSolution()
+	//collection.MapSolution()
 }
