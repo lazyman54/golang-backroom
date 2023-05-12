@@ -1,5 +1,6 @@
 package perfomance
 
+// go test -run ${TestMethod} //运行TestMethod方法
 // go test -bench
 // go test -bench='xxx$' .
 // go test -bench -cpu=2,4 .  指定使用的cpu核心数
