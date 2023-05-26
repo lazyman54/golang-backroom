@@ -41,5 +41,5 @@ func (m *MyGenStruct[T]) getGenData() *T {
 
 func init() {
 	//register(NewDefaultGenStruct[int64]())
-	register(NewMyGenStruct[int64]())
+	//register(NewMyGenStruct[int64]())
 }
