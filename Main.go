@@ -1,10 +1,12 @@
 package main
 
-import "github.com/lazymank54/golang-backroom/language/generic"
+import (
+	"github.com/lazymank54/golang-backroom/tax"
+)
 
 func main() {
 
-	//tax.CalcAndPrint()
+	tax.CalcAndPrint()
 	//server.StartServer()
 	//collection.SliceStudy()
 	//defer_.DeferSolution()
@@ -17,7 +19,7 @@ func main() {
 	//util.JsonSolution()
 	//crypto.HashSolution()
 	//util.TimeSolution()
-	generic.GenericSolution()
+	//generic.GenericSolution()
 	//encode.PbEncodeSolution()
 	//compress_.CompressSolution()
 	//biz.FinanceSolution()

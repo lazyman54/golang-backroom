@@ -16,8 +16,8 @@ type Context struct {
 }
 
 func CalcAndPrint() {
-	ctx := myCtx()
-	//ctx := demoCtx()
+	//ctx := myCtx()
+	ctx := demoCtx()
 
 	result := CalcYearsTax(ctx)
 
@@ -73,18 +73,25 @@ func calcTax(totalSalary int64, totalBase int64, totalSecurity int64, totalDeduc
 	if taxBaseAmount < 500000 {
 		return 0
 	} else if taxBaseAmount <= 3600000 {
+		fmt.Println("税率：3%")
 		return taxBaseAmount * 3 / 100
 	} else if taxBaseAmount <= 14400000 {
+		fmt.Println("税率：10%")
 		return taxBaseAmount*10/100 - 252000
 	} else if taxBaseAmount <= 30000000 {
+		fmt.Println("税率：20%")
 		return taxBaseAmount*20/100 - 1692000
 	} else if taxBaseAmount <= 42000000 {
+		fmt.Println("税率：25%")
 		return taxBaseAmount*25/100 - 3192000
 	} else if taxBaseAmount <= 66000000 {
+		fmt.Println("税率：30%")
 		return taxBaseAmount*30/100 - 5292000
 	} else if taxBaseAmount <= 96000000 {
+		fmt.Println("税率：35%")
 		return taxBaseAmount*35/100 - 8592000
 	} else {
+		fmt.Println("税率：45%")
 		return taxBaseAmount*45/100 - 18192000
 	}
 
@@ -93,18 +100,20 @@ func calcTax(totalSalary int64, totalBase int64, totalSecurity int64, totalDeduc
 func demoCtx() Context {
 
 	return Context{
-		SalaryBase: 3000000,
+		SalaryBase: 5500000,
 		SalaryDetailMap: map[int]int32{
-			1: 3050000,
-			5: 3090000,
+			1:  6000000,
+			10: 21000000,
+			11: 8250000,
+			12: 6000000,
 		},
-		SocialSecurityAmount1:     400000,
-		SocialSecurityAmount2:     450000,
+		SocialSecurityAmount1:     744636,
+		SocialSecurityAmount2:     784140,
 		SocialSecurityChangeMonth: 7,
-		SpecialDeductionBase:      250000,
+		SpecialDeductionBase:      300000,
 		SpecialDeductionDetailMap: map[int]int32{
-			1: 150000,
-			3: 150000,
+			1: 300000,
+			3: 300000,
 		},
 	}
 }
