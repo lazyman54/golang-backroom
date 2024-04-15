@@ -6,7 +6,7 @@ import (
 
 func main() {
 
-	tax.CalcAndPrint()
+	//tax.CalcAndPrint()
 	//server.StartServer()
 	//collection.SliceStudy()
 	//defer_.DeferSolution()
@@ -24,4 +24,5 @@ func main() {
 	//compress_.CompressSolution()
 	//biz.FinanceSolution()
 	//collection.MapSolution()
+	tax.NewRewardTaxIns().GetMyRewardPlan(19129200, 30)
 }

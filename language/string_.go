@@ -7,7 +7,7 @@ import (
 
 func StringSolution() {
 	//traversalString()
-	trimSpace()
+	stringToRune()
 }
 
 func trimSpace() {
@@ -30,4 +30,18 @@ func traversalString() {
 		fmt.Printf("%v(%c)", r, r)
 	}
 
+}
+
+func stringToRune() {
+	strObj := new(strStruct)
+	strObj.name = PtrString("I am a string")
+	fmt.Printf("print:%v", strObj)
+}
+
+type strStruct struct {
+	name *string
+}
+
+func PtrString(arg string) *string {
+	return &arg
 }
