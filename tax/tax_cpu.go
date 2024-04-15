@@ -14,6 +14,11 @@ type Context struct {
 	SpecialDeductionBase      int32         //专项扣除金额
 	SpecialDeductionDetailMap map[int]int32 //专项扣除里，如果某个月扣除数不对，可以额外指定，key=月份，value=当月的值
 }
+type taxInfo struct {
+	month     int32
+	taxAmount int64
+	taxRate   int32
+}
 
 func CalcAndPrint() {
 	//ctx := myCtx()
@@ -23,16 +28,16 @@ func CalcAndPrint() {
 
 	for i := 1; i <= 13; i++ {
 		if i == 13 {
-			fmt.Printf("全年总纳税额是:%.2f元\n", float64(result[i])/100)
+			fmt.Printf("全年总纳税额是:%.2f元\n", float64(result[i].taxAmount)/100)
 		} else {
-			fmt.Printf("%d月纳税额是:%.2f元\n", i, float64(result[i])/100)
+			fmt.Printf("%d月纳税额是:%.2f元, 纳税费率是：%d%%\n", i, float64(result[i].taxAmount)/100, result[i].taxRate)
 		}
 	}
 }
 
-func CalcYearsTax(ctx Context) map[int]int64 {
+func CalcYearsTax(ctx Context) map[int]*taxInfo {
 
-	var result = make(map[int]int64)
+	var result = make(map[int]*taxInfo)
 	var totalSalary, totalSecurity, totalDeduction, totalTax int64 = 0, 0, 0, 0
 
 	for i := 1; i <= 12; i++ {
@@ -55,65 +60,47 @@ func CalcYearsTax(ctx Context) map[int]int64 {
 		totalDeduction = totalDeduction + int64(monthDeduction)
 		totalBase := int64(i) * int64(baseSalary)
 
-		tax := calcTax(totalSalary, totalBase, totalSecurity, totalDeduction)
+		rate, tax := calcTax(totalSalary, totalBase, totalSecurity, totalDeduction)
+		taxInfo := &taxInfo{
+			month:     int32(i),
+			taxAmount: tax - totalTax,
+			taxRate:   rate,
+		}
 
-		result[i] = tax - totalTax
-		totalTax += result[i]
+		result[i] = taxInfo
+		totalTax += result[i].taxAmount
 	}
-	result[13] = totalTax
+
+	result[13] = &taxInfo{
+		month:     13,
+		taxAmount: totalTax,
+		taxRate:   0,
+	}
 
 	return result
 
 }
 
-func calcTax(totalSalary int64, totalBase int64, totalSecurity int64, totalDeduction int64) int64 {
+func calcTax(totalSalary int64, totalBase int64, totalSecurity int64, totalDeduction int64) (int32, int64) {
 
 	taxBaseAmount := totalSalary - totalBase - totalSecurity - totalDeduction
 
 	if taxBaseAmount < 500000 {
-		return 0
+		return 0, 0
 	} else if taxBaseAmount <= 3600000 {
-		fmt.Println("税率：3%")
-		return taxBaseAmount * 3 / 100
+		return 3, taxBaseAmount * 3 / 100
 	} else if taxBaseAmount <= 14400000 {
-		fmt.Println("税率：10%")
-		return taxBaseAmount*10/100 - 252000
+		return 10, taxBaseAmount*10/100 - 252000
 	} else if taxBaseAmount <= 30000000 {
-		fmt.Println("税率：20%")
-		return taxBaseAmount*20/100 - 1692000
+		return 20, taxBaseAmount*20/100 - 1692000
 	} else if taxBaseAmount <= 42000000 {
-		fmt.Println("税率：25%")
-		return taxBaseAmount*25/100 - 3192000
+		return 25, taxBaseAmount*25/100 - 3192000
 	} else if taxBaseAmount <= 66000000 {
-		fmt.Println("税率：30%")
-		return taxBaseAmount*30/100 - 5292000
+		return 30, taxBaseAmount*30/100 - 5292000
 	} else if taxBaseAmount <= 96000000 {
-		fmt.Println("税率：35%")
-		return taxBaseAmount*35/100 - 8592000
+		return 35, taxBaseAmount*35/100 - 8592000
 	} else {
-		fmt.Println("税率：45%")
-		return taxBaseAmount*45/100 - 18192000
+		return 45, taxBaseAmount*45/100 - 18192000
 	}
 
-}
-
-func demoCtx() Context {
-
-	return Context{
-		SalaryBase: 5500000,
-		SalaryDetailMap: map[int]int32{
-			1:  6000000,
-			10: 21000000,
-			11: 8250000,
-			12: 6000000,
-		},
-		SocialSecurityAmount1:     744636,
-		SocialSecurityAmount2:     784140,
-		SocialSecurityChangeMonth: 7,
-		SpecialDeductionBase:      300000,
-		SpecialDeductionDetailMap: map[int]int32{
-			1: 300000,
-			3: 300000,
-		},
-	}
 }
