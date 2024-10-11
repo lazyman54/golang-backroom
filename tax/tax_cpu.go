@@ -102,9 +102,7 @@ func calcTax(totalSalary int64, totalBase int64, totalSecurity int64, totalDeduc
 	} else {
 		return 45, taxBaseAmount*45/100 - 18192000
 	}
-
 }
-
 func demoCtx() Context {
 
 	return Context{
