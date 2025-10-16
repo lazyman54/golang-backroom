@@ -26,8 +26,8 @@ func CalcAndPrint() {
 
 	result := CalcYearsTax(ctx)
 
-	for i := 1; i <= 13; i++ {
-		if i == 13 {
+	for i := 1; i <= 14; i++ {
+		if i == 14 {
 			fmt.Printf("全年总纳税额是:%.2f元\n", float64(result[i].taxAmount)/100)
 		} else {
 			fmt.Printf("%d月纳税额是:%.2f元, 纳税费率是：%d%%\n", i, float64(result[i].taxAmount)/100, result[i].taxRate)
@@ -40,7 +40,7 @@ func CalcYearsTax(ctx Context) map[int]*taxInfo {
 	var result = make(map[int]*taxInfo)
 	var totalSalary, totalSecurity, totalDeduction, totalTax int64 = 0, 0, 0, 0
 
-	for i := 1; i <= 12; i++ {
+	for i := 1; i <= 13; i++ {
 		monthSalary := ctx.SalaryBase
 		if salary, ok := ctx.SalaryDetailMap[i]; ok {
 			monthSalary = salary
@@ -54,11 +54,18 @@ func CalcYearsTax(ctx Context) map[int]*taxInfo {
 		if deduction, ok := ctx.SpecialDeductionDetailMap[i]; ok {
 			monthDeduction = deduction
 		}
-
+		if i == 13 {
+			monthSecurity = 0
+			monthDeduction = 0
+		}
 		totalSalary = totalSalary + int64(monthSalary)
 		totalSecurity = totalSecurity + int64(monthSecurity)
 		totalDeduction = totalDeduction + int64(monthDeduction)
-		totalBase := int64(i) * int64(baseSalary)
+		num := i
+		if i == 13 {
+			num = i - 1
+		}
+		totalBase := int64(num) * int64(baseSalary)
 
 		rate, tax := calcTax(totalSalary, totalBase, totalSecurity, totalDeduction)
 		taxInfo := &taxInfo{
@@ -71,8 +78,8 @@ func CalcYearsTax(ctx Context) map[int]*taxInfo {
 		totalTax += result[i].taxAmount
 	}
 
-	result[13] = &taxInfo{
-		month:     13,
+	result[14] = &taxInfo{
+		month:     14,
 		taxAmount: totalTax,
 		taxRate:   0,
 	}
@@ -106,16 +113,16 @@ func calcTax(totalSalary int64, totalBase int64, totalSecurity int64, totalDeduc
 func demoCtx() Context {
 
 	return Context{
-		SalaryBase: 6000000,
+		SalaryBase: ,
 		SalaryDetailMap: map[int]int32{
-			1: 6500000,
-			2: 6188800,
-			5: 16000000,
+			1:  ,
+			3: ,
+			13: ,
 		},
-		SocialSecurityAmount1:     778638,
-		SocialSecurityAmount2:     778638,
+		SocialSecurityAmount1:     ,
+		SocialSecurityAmount2:     ,
 		SocialSecurityChangeMonth: 7,
-		SpecialDeductionBase:      300000,
+		SpecialDeductionBase:      450000,
 		SpecialDeductionDetailMap: map[int]int32{},
 	}
 }
