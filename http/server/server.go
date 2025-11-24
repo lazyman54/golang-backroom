@@ -13,7 +13,7 @@ import (
 
 func StartServer() {
 
-	stopChan := make(chan os.Signal)
+	stopChan := make(chan os.Signal, 1)
 	signal.Notify(stopChan, os.Interrupt)
 
 	mux := http.NewServeMux()
@@ -36,7 +36,8 @@ func StartServer() {
 	<-stopChan
 	log.Println("shutting down server...")
 
-	ctx, _ := context.WithTimeout(context.Background(), 5*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
 	srv.Shutdown(ctx)
 	log.Println("Server gracefully stopped")
 }

@@ -10,10 +10,10 @@ var wg sync.WaitGroup
 func hello() {
 	fmt.Println("hello")
 	for i := 0; i < 5; i++ {
-		go func() {
+		go func(i int) {
 			fmt.Println("i", i)
 			wg.Done()
-		}()
+		}(i)
 	}
 	wg.Done()
 }
